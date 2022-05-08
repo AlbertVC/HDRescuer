@@ -3,7 +3,7 @@
 (cd api_gateway_module/ && docker-compose up -d)
 (cd api_composer_module/ && docker-compose up -d)
 (cd users_module/ && docker-compose up -d)
-(cd session_module/ && docker-compose up -d)
+(cd session_module/ && docker-compose up)
 (cd data_recovery_module/ && docker-compose up -d)
 
 

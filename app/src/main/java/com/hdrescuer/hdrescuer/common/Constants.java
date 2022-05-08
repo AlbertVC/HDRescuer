@@ -10,11 +10,11 @@ import java.time.Instant;
 public class Constants {
 
 
-    public static final String DATA_RESCUER_API_GATEWAY= "http://192.168.1.135:8080/";
+    public static final String DATA_RESCUER_API_GATEWAY= "http://192.168.1.136:8080/";
 
 
     //API E4BAND
-    public static final String EMPATICA_API_KEY = "<insert your empatica api key>";
+    public static final String EMPATICA_API_KEY = "18d99664d52f44a0a6e27470590f3132";
 
     //CAPABILITIES TO DETECT EACH OTHER (PHONE AND WATCH)
     //Si se cambia debe cambiarse también en /res/values/wear.xml
