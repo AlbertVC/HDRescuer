@@ -140,6 +140,7 @@ exports.stop_session = function(req,res,next){
 
             if(session != null){
                 console.log(session);
+                console.log("fin de sesion")
                 let timestamp_ini = session.timestamp_ini;
                 let total_time = Math.round((timestamp_fin.getTime() - timestamp_ini.getTime())/1000); //Tiempo total en segundos
 
@@ -155,7 +156,8 @@ exports.stop_session = function(req,res,next){
                         res.status(404).json("Error al finalizar la sesión, no se ha podido registrar la parada");
                     }else{
                         if(modified_session != null){
-            
+                            console.log("modificada")
+                            console.log(SessionData)
                             res.status(200).json(modified_session.session_id);
                     
                         }

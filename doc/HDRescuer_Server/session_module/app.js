@@ -16,7 +16,7 @@ let app = express();
 
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://mongodb/sessiondata', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb+srv://alberto:contrasenia1@cluster0.klfryfq.mongodb.net/?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

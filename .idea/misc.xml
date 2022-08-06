@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/empatica_item_linechart.xml" value="0.16210739614994935" />
+      </map>
+    </option>
+  </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/2_Universidad/4_CUARTO/2_CUATRIMESTRE/PDM/Entregas/APP1-HDRESCUER/JavaDocApp" />
     <option name="OPTION_SCOPE" value="private" />

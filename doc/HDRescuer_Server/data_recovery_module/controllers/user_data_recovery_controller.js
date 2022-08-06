@@ -14,7 +14,6 @@ exports.add_data_to_db = function(req, res, next) {
     if(req.body.session_id == null || req.body.session_id == 0){
         res.send("No está viajando el identificador de sesión");
     }else{
-
         let session_id = req.body.session_id;
         let timeStamp = req.body.timeStamp;
         let e4connected = req.body.e4connected;
@@ -84,17 +83,14 @@ exports.add_data_to_db = function(req, res, next) {
 
 
 exports.parse_ticwatch_csv = function(req,res,next){
-
     const filesRows = [];
-
+    print(req.file.path)
     csv.parseFile(req.file.path)
         .on("data", function(data){
             filesRows.push(data);
         })
         .on("end", function(){
             
-            fs.unlinkSync(req.file.path);
-
             let session_id = filesRows[0][0];
             //Cabeceras TICWATCH
             //"SESSION_ID,TIMESTAMP,TIC_ACCX,TIC_ACCY,TIC_ACCZ,TIC_ACCLX,TIC_ACCLY,TIC_ACCLZ,TIC_GIRX,TIC_GIRY,TIC_GIRZ,TIC_HRPPG,TIC_STEP"
@@ -146,23 +142,24 @@ exports.parse_ticwatch_csv = function(req,res,next){
 exports.parse_empatica_csv = function(req,res,next){
 
     const filesRows = [];
-
+    console.log("PARSE EMPATICS")
+    console.log(req.file)
     csv.parseFile(req.file.path)
         .on("data", function(data){
             filesRows.push(data);
         })
         .on("end", function(){
 
-            fs.unlinkSync(req.file.path);
-
-            let session_id = filesRows[0][0];
+            let session_id = filesRows[1][0];
+            console.log("filas")
             //CABECERAS EMPATICA
             //"SESSION_ID,TIMESTAMP,E4_ACCX,E4_ACCY,E4_ACCZ,E4_BVP,E4_HR,E4_GSR,E4_IBI,E4_TEMP"
-            let objs = filesRows.map(function(x){
+            const cleanedRows = filesRows.slice(1)
+            let objs = cleanedRows.map(function(x){
 
                 let instancia_emp = new Empatica({
                     session_id: x[0],
-                    timeStamp: new Date(x[1]).toISOString(),
+                    timeStamp: x[1],
                     e4_accx:    x[2],
                     e4_accy:    x[3],
                     e4_accz:    x[4],
@@ -170,7 +167,8 @@ exports.parse_empatica_csv = function(req,res,next){
                     e4_hr:      x[6],
                     e4_gsr:     x[7],
                     e4_ibi:     x[8],
-                    e4_temp:    x[9]   
+                    e4_temp:    x[9],
+                    animalState: x[10],   
                 });
 
                 return instancia_emp;                
@@ -191,6 +189,7 @@ exports.parse_empatica_csv = function(req,res,next){
            });
 
         });
+    Empatica.find({})
 
     res.status(200).json("Datos recibidos");
 

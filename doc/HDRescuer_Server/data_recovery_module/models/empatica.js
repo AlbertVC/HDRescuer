@@ -16,7 +16,8 @@ e4_bvp: {type: Number},
 e4_hr: {type: Number},
 e4_gsr: {type: Number},
 e4_ibi: {type: Number},
-e4_temp:{type: Number}
+e4_temp:{type: Number},
+animalState:{type: String}
 },
 {collection : 'Empatica'});
 

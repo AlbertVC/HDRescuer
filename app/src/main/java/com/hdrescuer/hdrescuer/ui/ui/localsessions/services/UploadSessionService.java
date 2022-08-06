@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.time.Instant;
 import java.util.List;
@@ -176,9 +177,22 @@ public class UploadSessionService extends IntentService {
         try {
             fos = MyApp.getContext().openFileOutput(FILE_NAME_EMPATICA, MODE_PRIVATE);
 
+            /*fos.write(("session-id"+",").getBytes());
+            fos.write(("timestamp"+",").getBytes());
+            fos.write(("x-axis"+",").getBytes());
+            fos.write(("y-axis"+",").getBytes());
+            fos.write(("z-axis"+",").getBytes());
+            fos.write(("bvp"+",").getBytes());
+            fos.write(("hr"+",").getBytes());
+            fos.write(("gsr"+",").getBytes());
+            fos.write(("ibi"+",").getBytes());
+            fos.write(("temp"+",").getBytes());
+            fos.write(("animalState").getBytes());
+            fos.write("\n".getBytes());*/
+
             for(int i = 0; i< empaticaEntities.size(); i++){
                 fos.write((this.session_id+",").getBytes());
-                fos.write((Date.from(Instant.parse(empaticaEntities.get(i).timestamp)).toString() +",").getBytes());
+                fos.write(((Date.from(Instant.parse(empaticaEntities.get(i).timestamp)).getTime())/1000 +",").getBytes());
                 fos.write((Integer.toString(empaticaEntities.get(i).e4_accx)+",").getBytes());
                 fos.write((Integer.toString(empaticaEntities.get(i).e4_accy)+",").getBytes());
                 fos.write((Integer.toString(empaticaEntities.get(i).e4_accz)+",").getBytes());
@@ -186,7 +200,8 @@ public class UploadSessionService extends IntentService {
                 fos.write((Integer.toString(empaticaEntities.get(i).e4_hr)+",").getBytes());
                 fos.write((Float.toString(empaticaEntities.get(i).e4_gsr)+",").getBytes());
                 fos.write((Float.toString(empaticaEntities.get(i).e4_ibi)+",").getBytes());
-                fos.write((Float.toString(empaticaEntities.get(i).e4_temp)).getBytes());
+                fos.write((Float.toString(empaticaEntities.get(i).e4_temp)+",").getBytes());
+                fos.write(((sessionEntity.description)+";").getBytes());
                 fos.write("\n".getBytes());
             }
 

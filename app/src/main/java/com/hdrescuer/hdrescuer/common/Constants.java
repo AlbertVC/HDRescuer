@@ -10,7 +10,7 @@ import java.time.Instant;
 public class Constants {
 
 
-    public static final String DATA_RESCUER_API_GATEWAY= "http://192.168.1.136:8080/";
+    public static final String DATA_RESCUER_API_GATEWAY= "http://192.168.42.6:8080/";
 
 
     //API E4BAND
